@@ -1,3 +1,9 @@
+<?php
+// Verificamos que haya sesión activa
+$nombreUsuario = $_SESSION['nombre'] ?? 'Usuario';
+$cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
+?>
+
 <!-- NavLateral -->
 <section class="full-width navLateral scroll" id="navLateral">
     <div class="full-width navLateral-body">
@@ -10,8 +16,8 @@
             </div>
             <figcaption class="navLateral-body-cr pt-3">
                 <span>
-                    Nombre de usuario<br>
-                    <small>(Cargo)</small>
+                    <?php echo htmlspecialchars($nombreUsuario); ?><br>
+                    <small>(<?php echo htmlspecialchars($cargoUsuario); ?>)</small>
                 </span>
             </figcaption>
         </figure>
@@ -71,7 +77,7 @@
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width">
-                    <a href="#" class="full-width btn-subMenu">
+                    <a href="<?php echo APP_URL; ?>usuario" class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
                             <i class="fas fa-users fa-fw"></i>
                         </div>
@@ -82,7 +88,7 @@
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>nuevoUsuario?accion=form" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-cash-register fa-fw"></i>
                                 </div>
@@ -92,7 +98,7 @@
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>nuevoUsuario?accion=lista" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-clipboard-list fa-fw"></i>
                                 </div>

@@ -5,7 +5,7 @@
          <nav class="navBar-options-list">
              <ul class="list-unstyle">
                  <li class="text-condensedLight noLink">
-                     <a class="btn-exit" href="#">
+                     <a class="btn-exit" href="<?php echo APP_URL; ?>login?accion=salir">
                          <i class="fas fa-power-off"></i>
                      </a>
                  </li>

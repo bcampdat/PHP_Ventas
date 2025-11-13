@@ -12,6 +12,8 @@ class viewsModel
             "dashboard",
             "producto",    
             "usuario",
+            "caja",
+            "nuevoUsuario",
             "cliente",
             "categoria",
             "venta"

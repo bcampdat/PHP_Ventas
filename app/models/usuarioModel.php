@@ -26,4 +26,48 @@ class usuarioModel extends mainModel {
         $sql->bindParam(":caja", $datos['caja']);
         return $sql->execute();
     }
+
+    // Listar todos los usuarios
+    public function listarUsuarios() {
+        $sql = $this->getPDO()->query("SELECT * FROM usuario");
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    // Obtener un usuario por ID
+    public function obtenerUsuario($id) {
+        $stmt = $this->getPDO()->prepare("SELECT * FROM usuario WHERE usuario_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    // Actualizar usuario
+    public function actualizarUsuario($id, $datos) {
+        $sql = $this->getPDO()->prepare("
+            UPDATE usuario SET
+                usuario_nombre = :nombre,
+                usuario_apellido = :apellido,
+                usuario_email = :email,
+                usuario_usuario = :usuario,
+                usuario_cargo = :cargo,
+                caja_id = :caja
+            WHERE usuario_id = :id
+        ");
+        $sql->bindParam(':nombre', $datos['nombre']);
+        $sql->bindParam(':apellido', $datos['apellido']);
+        $sql->bindParam(':email', $datos['email']);
+        $sql->bindParam(':usuario', $datos['usuario']);
+        $sql->bindParam(':cargo', $datos['cargo']);
+        $sql->bindParam(':caja', $datos['caja']);
+        $sql->bindParam(':id', $id);
+        return $sql->execute();
+    }
+
+    // Eliminar usuario
+    public function eliminarUsuario($id) {
+        $sql = $this->getPDO()->prepare("DELETE FROM usuario WHERE usuario_id = :id");
+        $sql->bindParam(':id', $id);
+        return $sql->execute();
+    }
 }
+
