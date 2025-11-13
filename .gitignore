@@ -1,0 +1,29 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+
+# Archivos de configuración local
+app/config/*.local.php
+.env
+.env.local
+
+# Archivos subidos por el usuario (si los guardas dentro del proyecto)
+app/ajax/uploads/
+app/views/uploads/
+app/pdf/tmp/
+
+# Composer (si lo usas en algún momento)
+vendor/
+
+# Logs y caché
+*.log
+*.cache
+*.tmp
+
+# Backups y ediciones temporales
+*.bak
+*.swp
+*.old
