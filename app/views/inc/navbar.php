@@ -10,7 +10,7 @@
                      </a>
                  </li>
                  <li class="text-condensedLight noLink">
-                     <small>Usuario</small>
+                     <small><?php echo htmlspecialchars($nombreUsuario); ?><br></small>
                  </li>
                  <li class="noLink">
                      <img class="is-rounded img-responsive" src="<?php echo APP_URL; ?>app/views/fotos/default.png">

@@ -7,7 +7,7 @@
         </figure>
     </div>
     <div class="columns is-flex is-justify-content-center">
-        <h2 class="subtitle">¡Bienvenido NOMBRE DE USUARIO!</h2>
+        <h2 class="subtitle">¡Bienvenido <?php echo htmlspecialchars($nombreUsuario); ?>!</h2>
     </div>
 </div>
 
@@ -18,21 +18,21 @@
             <nav class="level is-mobile">
 
                 <div class="level-item has-text-centered">
-                    <a href="cashierList/">
+                    <a href="<?php echo APP_URL; ?>caja?accion=lista">
                         <p class="heading"><i class="fas fa-cash-register fa-fw"></i> &nbsp; Cajas</p>
                         <p class="title">0</p>
                     </a>
                 </div>
 
                 <div class="level-item has-text-centered">
-                    <a href="userList/">
+                    <a href="<?php echo APP_URL; ?>nuevoUsuario?accion=lista">
                         <p class="heading"><i class="fas fa-users fa-fw"></i> &nbsp; Usuarios</p>
                         <p class="title">0</p>
                     </a>
                 </div>
 
                 <div class="level-item has-text-centered">
-                    <a href="clientList/">
+                    <a href="<?php echo APP_URL; ?>cliente?accion=lista">
                         <p class="heading"><i class="fas fa-address-book fa-fw"></i> &nbsp; Clientes</p>
                         <p class="title">0</p>
                     </a>
@@ -46,7 +46,7 @@
             <nav class="level is-mobile">
 
                 <div class="level-item has-text-centered">
-                    <a href="categoryList/">
+                    <a href="<?php echo APP_URL; ?>categoria">
                         <p class="heading"><i class="fas fa-tags fa-fw"></i> &nbsp; Categorías</p>
                         <p class="title">0</p>
                     </a>
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="level-item has-text-centered">
-                    <a href="saleList/">
+                    <a href="<?php echo APP_URL; ?>venta">
                         <p class="heading"><i class="fas fa-shopping-cart fa-fw"></i> &nbsp; Ventas</p>
                         <p class="title">0</p>
                     </a>

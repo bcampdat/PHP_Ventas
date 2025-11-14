@@ -13,18 +13,24 @@ class usuarioModel extends mainModel {
     }
 
     public function registrarUsuario($datos){
-        $sql = $this->getPDO()->prepare("
-            INSERT INTO usuario (usuario_nombre, usuario_apellido, usuario_email, usuario_usuario, usuario_clave, usuario_cargo, usuario_foto, caja_id)
-            VALUES (:nombre, :apellido, :email, :usuario, :clave, :cargo, '', :caja)
-        ");
-        $sql->bindParam(":nombre", $datos['nombre']);
-        $sql->bindParam(":apellido", $datos['apellido']);
-        $sql->bindParam(":email", $datos['email']);
-        $sql->bindParam(":usuario", $datos['usuario']);
-        $sql->bindParam(":clave", $datos['clave']);
-        $sql->bindParam(":cargo", $datos['cargo']);
-        $sql->bindParam(":caja", $datos['caja']);
-        return $sql->execute();
+    $empresa_id = $datos['empresa'] ?? 1; // Por defecto empresa 1
+
+    $sql = $this->getPDO()->prepare("
+        INSERT INTO usuario 
+        (usuario_nombre, usuario_apellido, usuario_email, usuario_usuario, usuario_clave, usuario_cargo, usuario_foto, caja_id, empresa_id)
+        VALUES 
+        (:nombre, :apellido, :email, :usuario, :clave, :cargo, '', :caja, :empresa)
+    ");
+    $sql->bindParam(":nombre", $datos['nombre']);
+    $sql->bindParam(":apellido", $datos['apellido']);
+    $sql->bindParam(":email", $datos['email']);
+    $sql->bindParam(":usuario", $datos['usuario']);
+    $sql->bindParam(":clave", $datos['clave']);
+    $sql->bindParam(":cargo", $datos['cargo']);
+    $sql->bindParam(":caja", $datos['caja']);
+    $sql->bindParam(":empresa", $empresa_id);
+
+    return $sql->execute();
     }
 
     // Listar todos los usuarios
@@ -50,7 +56,8 @@ class usuarioModel extends mainModel {
                 usuario_email = :email,
                 usuario_usuario = :usuario,
                 usuario_cargo = :cargo,
-                caja_id = :caja
+                caja_id = :caja,
+                empresa_id= :empresa
             WHERE usuario_id = :id
         ");
         $sql->bindParam(':nombre', $datos['nombre']);
@@ -59,6 +66,7 @@ class usuarioModel extends mainModel {
         $sql->bindParam(':usuario', $datos['usuario']);
         $sql->bindParam(':cargo', $datos['cargo']);
         $sql->bindParam(':caja', $datos['caja']);
+        $sql->bindParam(':empresa', $datos['empresa']);
         $sql->bindParam(':id', $id);
         return $sql->execute();
     }

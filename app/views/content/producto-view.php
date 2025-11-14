@@ -59,7 +59,6 @@ $productos = $productoCtrl->listarProductos();
     <h3><?= isset($_GET['editar']) ? 'Editar Producto' : 'Nuevo Producto' ?></h3>
 
     <form method="POST" enctype="multipart/form-data">
-        <!-- Accion: 'crear' o 'editar' -->
         <input type="hidden" name="accion" value="<?= isset($_GET['editar']) ? 'editar' : 'crear' ?>">
         <input type="hidden" name="id" value="<?= $productoEditar['producto_id'] ?? '' ?>">
 

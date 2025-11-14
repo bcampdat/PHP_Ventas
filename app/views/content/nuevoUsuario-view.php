@@ -1,11 +1,15 @@
 <?php
 use app\controllers\usuarioController;
+use app\controllers\empresaController;
 
 $usuarioController = new usuarioController();
+$empresaController = new empresaController();
+$empresas = $empresaController->listarEmpresasControlador();
 
 // Acción a ejecutar
 $accion = $_GET['accion'] ?? 'form';
 $id = $_GET['id'] ?? null;
+
 
 // Procesar eliminación
 if($accion === 'eliminar' && $id){
@@ -116,6 +120,17 @@ if($accion === 'lista'){
                             </div>
                         </div>
 
+                         <div class="field">
+                            <label class="label">Empresa</label>
+                            <div class="control">
+                                <select name="empresa" class="input" required>
+                                    <?php foreach($empresas as $e): ?>
+                                       <option value="<?= $e['empresa_id'] ?>"><?= $e['empresa_nombre'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="field mt-4 has-text-centered">
                             <button type="submit" class="button is-info is-rounded">Registrar</button>
                         </div>
@@ -194,6 +209,7 @@ if($accion === 'lista'){
                                 <th>Usuario</th>
                                 <th>Cargo</th>
                                 <th>Caja</th>
+                                <th>Empresa</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -208,6 +224,7 @@ if($accion === 'lista'){
                                         <td><?= $u['usuario_usuario']; ?></td>
                                         <td><?= $u['usuario_cargo']; ?></td>
                                         <td><?= $u['caja_id']; ?></td>
+                                        <td><?= $u['empresa_nombre'] ?? 'No asignada'; ?></td>
                                         <td>
                                             <a href="<?= APP_URL ?>nuevoUsuario?accion=editar&id=<?= $u['usuario_id'] ?>">Editar</a> |
                                             <a href="<?= APP_URL ?>nuevoUsuario?accion=eliminar&id=<?= $u['usuario_id'] ?>" onclick="return confirm('¿Seguro que quieres eliminar este usuario?');">Eliminar</a>

@@ -27,6 +27,7 @@ class loginController extends usuarioModel {
                 $_SESSION['apellido'] = $datos['usuario_apellido'];
                 $_SESSION['usuario']  = $datos['usuario_usuario'];
                 $_SESSION['cargo']    = $datos['usuario_cargo'];
+                
 
                 echo "<script>window.location.href='".APP_URL."index.php?views=dashboard';</script>";
                 exit;
@@ -47,6 +48,8 @@ class loginController extends usuarioModel {
         $clave    = password_hash($_POST['clave'] ?? '', PASSWORD_BCRYPT);
         $cargo    = "Empleado";
         $caja     = 1;
+        $empresa  = $_POST['empresa'] ?? 1;
+        
 
         $resultado = $this->registrarUsuario([
             "nombre"=>$nombre,
@@ -55,7 +58,8 @@ class loginController extends usuarioModel {
             "usuario"=>$usuario,
             "clave"=>$clave,
             "cargo"=>$cargo,
-            "caja"=>$caja
+            "caja"=>$caja,
+            "empresa"  => $empresa 
         ]);
 
         if($resultado){

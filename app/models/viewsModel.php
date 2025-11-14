@@ -14,6 +14,7 @@ class viewsModel
             "usuario",
             "caja",
             "nuevoUsuario",
+            "empresa",
             "cliente",
             "categoria",
             "venta"

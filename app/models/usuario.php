@@ -30,8 +30,7 @@ class Usuario
 
                 // Verificar la contraseña (usando password_verify)
                 if (password_verify($password, $user['usuario_clave'])) {
-                    // Contraseña válida
-                    return $user;  // Devuelvo los datos del usuario si el login es exitoso
+                    return $user;  
                 } else {
                     throw new \Exception("Contraseña incorrecta.");
                 }
@@ -39,24 +38,22 @@ class Usuario
                 throw new \Exception("Usuario no encontrado.");
             }
         } catch (\PDOException $e) {
-            // Capturamos errores de la base de datos
             return "Error en la base de datos: " . $e->getMessage();
         } catch (\Exception $e) {
-            // Capturamos cualquier otro tipo de error
             return "Error: " . $e->getMessage();
         }
     }
 
     // Método para registrar un nuevo usuario
-    public function registrar($nombre, $apellido, $email, $usuario, $clave, $cargo, $foto, $caja_id)
+    public function registrar($nombre, $apellido, $email, $usuario, $clave, $cargo, $foto, $caja_id, $empresa)
     {
         try {
             // Encriptar la contraseña con bcrypt
             $clave_encriptada = password_hash($clave, PASSWORD_BCRYPT);
 
             // SQL para insertar el nuevo usuario en la base de datos
-            $sql = "INSERT INTO usuario (usuario_nombre, usuario_apellido, usuario_email, usuario_usuario, usuario_clave, usuario_cargo, usuario_foto, caja_id)
-                    VALUES (:nombre, :apellido, :email, :usuario, :clave, :cargo, :foto, :caja_id)";
+            $sql = "INSERT INTO usuario (usuario_nombre, usuario_apellido, usuario_email, usuario_usuario, usuario_clave, usuario_cargo, usuario_foto, caja_id, empresa_id)
+                    VALUES (:nombre, :apellido, :email, :usuario, :clave, :cargo, :foto, :caja_id, :empresa)";
 
             $stmt = $this->pdo->prepare($sql);
 
@@ -69,18 +66,17 @@ class Usuario
             $stmt->bindParam(':cargo', $cargo);
             $stmt->bindParam(':foto', $foto);
             $stmt->bindParam(':caja_id', $caja_id);
+            $stmt->bindParam(':empresa', $empresa);
+
 
             if ($stmt->execute()) {
-                return true;  // Usuario creado con éxito
+                return true;  
             } else {
-                // Si no se ejecuta correctamente, podemos devolver un error más detallado
                 throw new \Exception("Error al registrar el usuario.");
             }
         } catch (\PDOException $e) {
-            // Capturamos errores de la base de datos
             return "Error en la base de datos: " . $e->getMessage();
         } catch (\Exception $e) {
-            // Capturamos cualquier otro tipo de error
             return "Error: " . $e->getMessage();
         }
     }

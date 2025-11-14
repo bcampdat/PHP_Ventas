@@ -1,9 +1,5 @@
 RewriteEngine On
 Options All -Indexes
-RewriteBase /POS/
 
 # Redirige todo lo que coincida con letras, números, guiones, barras o ñ a index.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-RewriteRule ^([a-zA-Z0-9/ñÑ_-]+)$ index.php?views=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1 [L,QSA]

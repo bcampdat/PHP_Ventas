@@ -2,6 +2,8 @@
 // Verificamos que haya sesión activa
 $nombreUsuario = $_SESSION['nombre'] ?? 'Usuario';
 $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
+$empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
+
 ?>
 
 <!-- NavLateral -->
@@ -41,7 +43,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width">
-                    <a href="#" class="full-width btn-subMenu">
+                    <a href="<?php echo APP_URL; ?>caja"  class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
                             <i class="fas fa-cash-register fa-fw"></i>
                         </div>
@@ -52,7 +54,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>caja?accion=form"  class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-cash-register fa-fw"></i>
                                 </div>
@@ -62,7 +64,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>caja?accion=lista" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-clipboard-list fa-fw"></i>
                                 </div>
@@ -113,7 +115,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width">
-                    <a href="#" class="full-width btn-subMenu">
+                    <a href="<?php echo APP_URL; ?>clientes" class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
                             <i class="fas fa-address-book fa-fw"></i>
                         </div>
@@ -124,7 +126,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>cliente?accion=crear"  class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-male fa-fw"></i>
                                 </div>
@@ -134,7 +136,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>cliente?accion=lista"  class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-clipboard-list fa-fw"></i>
                                 </div>
@@ -149,7 +151,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width">
-                    <a href="#" class="full-width btn-subMenu">
+                    <a href="<?php echo APP_URL; ?>categoria"class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
                             <i class="fas fa-tags fa-fw"></i>
                         </div>
@@ -160,7 +162,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>categoria?accion=crear" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-tag fa-fw"></i>
                                 </div>
@@ -170,7 +172,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>categoria?accion=lista"class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-clipboard-list fa-fw"></i>
                                 </div>
@@ -231,7 +233,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width">
-                    <a href="#" class="full-width btn-subMenu">
+                    <a href="<?php echo APP_URL; ?>venta" class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
                             <i class="fas fa-shopping-cart fa-fw"></i>
                         </div>
@@ -242,7 +244,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>venta?accion=crear" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-cart-plus fa-fw"></i>
                                 </div>
@@ -252,7 +254,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>venta?accion=lista" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-clipboard-list fa-fw"></i>
                                 </div>
@@ -314,7 +316,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="<?php echo APP_URL; ?>empresa" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-store-alt fa-fw"></i>
                                 </div>
@@ -324,7 +326,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="usuario" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-user-tie fa-fw"></i>
                                 </div>
@@ -334,7 +336,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="#" class="full-width">
+                            <a href="usuario_foto" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-camera"></i>
                                 </div>
@@ -349,7 +351,7 @@ $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width mt-5">
-                    <a href="#" class="full-width btn-exit" >
+                    <a href="<?php echo APP_URL; ?>login?accion=salir"  class="full-width btn-exit" >
                         <div class="navLateral-body-cl">
                             <i class="fas fa-power-off"></i>
                         </div>
