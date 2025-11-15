@@ -301,6 +301,40 @@ body,html{
     transform: rotate(180deg);
 }
 
+.btn-eliminar-foto {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-eliminar-foto:hover {
+    background: rgba(255, 56, 96, 0.1);
+}
+
+.icono-eliminar {
+    color: #494949;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-eliminar-foto:hover .icono-eliminar {
+    color: #ff3860;
+    font-size: 16px; 
+    z-index: 10;
+    transform: scale(1.2);
+}
+
 /*=============Estilos contenido pagina*/
 .pageContent{
     width: calc(100% - 300px);

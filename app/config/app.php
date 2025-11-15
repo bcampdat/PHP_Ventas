@@ -7,7 +7,7 @@
 
     const DOCUMENTOS= ["DUI", "DNI", "Cedula", "Licencia", "Pasaporte", "Otro"];
     
-    const PRODUCTO_UNIDAD = ["Unidad", "Libra", "Kilogramo", "Caja", "Paquete", "Lata", "Galon", "Botella", "Tira", "Sobre", "Bolsa", "Saco", "Tarjeta", "Otro"];
+    const PRODUCTO_UNIDAD = ["Unidad", "Libra", "Kilogramo", "Caja", "Paquete", "Lata", "litro", "Galon", "Botella", "Tira", "Sobre", "Bolsa", "Saco", "Tarjeta", "Otro"];
     
 
     const MONEDA_SIMBOLO = "€";  // Símbolo del euro
@@ -16,6 +16,6 @@
     const SEPARADOR_DECIMAL = ",";    // Separador decimal 
     const SEPARADOR_MILLAR = ".";      // Separador de millar
 
-    const CAMPO_OBLIGATORIO='&nbsp; <i class="fas fa-edit"></i> &nbsp;';
+    //const CAMPO_OBLIGATORIO='&nbsp; <i class="fas fa-edit"></i> &nbsp;';
 
     date_default_timezone_set("Europe/Madrid");

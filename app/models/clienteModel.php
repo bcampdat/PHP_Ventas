@@ -1,17 +1,30 @@
 <?php
+
 namespace app\models;
+
 use PDO;
 
-class clienteModel extends mainModel {
+class clienteModel extends mainModel
+{
 
     // Obtener todos los clientes
-    public function obtenerClientes() {
+    public function obtenerClientes()
+    {
         $sql = $this->getPDO()->query("SELECT * FROM cliente");
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function obtenerClientesPorEmpresa($empresaId)
+    {
+        $sql = $this->getPDO()->prepare("SELECT * FROM cliente WHERE empresa_id = :empresa_id");
+        $sql->bindParam(":empresa_id", $empresaId, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Obtener un cliente por su ID
-    public function obtenerCliente($id) {
+    public function obtenerCliente($id)
+    {
         $sql = $this->getPDO()->prepare("SELECT * FROM cliente WHERE cliente_id = :id");
         $sql->bindParam(":id", $id, PDO::PARAM_INT);
         $sql->execute();
@@ -19,7 +32,8 @@ class clienteModel extends mainModel {
     }
 
     // Crear un nuevo cliente
-    public function crearCliente($datos) {
+    public function crearCliente($datos)
+    {
         $sql = $this->getPDO()->prepare("
             INSERT INTO cliente (
                 cliente_tipo_documento, cliente_numero_documento, cliente_nombre, 
@@ -39,7 +53,8 @@ class clienteModel extends mainModel {
     }
 
     // Actualizar 
-    public function actualizarCliente($id, $datos) {
+    public function actualizarCliente($id, $datos)
+    {
         $sql = $this->getPDO()->prepare("
             UPDATE cliente SET
                 cliente_tipo_documento = :tipo_documento,
@@ -63,7 +78,8 @@ class clienteModel extends mainModel {
     }
 
     // Eliminar un cliente
-    public function eliminarCliente($id) {
+    public function eliminarCliente($id)
+    {
         $sql = $this->getPDO()->prepare("DELETE FROM cliente WHERE cliente_id = :id");
         $sql->bindParam(":id", $id, PDO::PARAM_INT);
         return $sql->execute();

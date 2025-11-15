@@ -10,34 +10,18 @@ class cajaController extends cajaModel {
         return $this->obtenerCajas();  
     }
 
+    public function listarCajasPorEmpresa($empresaId) {
+        return $this->obtenerCajasPorEmpresa($empresaId);
+    }
+
     // Crear una nueva caja
-    public function crearCajaControlador() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            // Recibir los datos del formulario
-            $datos = [
-                'numero' => $_POST['numero'] ?? '',
-                'nombre' => $_POST['nombre'] ?? '',
-                'efectivo' => $_POST['efectivo'] ?? 0.00,
-            ];
-
-            return $this->crearCaja($datos);
-        }
+    public function crearCajaControlador($datos) {
+        return $this->crearCaja($datos);
     }
 
     // Actualizar una caja existente
-    public function actualizarCajaControlador($id) {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            // Recibir los datos del formulario
-            $datos = [
-                'numero' => $_POST['numero'] ?? '',
-                'nombre' => $_POST['nombre'] ?? '',
-                'efectivo' => $_POST['efectivo'] ?? 0.00,
-            ];
-
-            return $this->actualizarCaja($id, $datos);
-        }
+    public function actualizarCajaControlador($id, $datos) {
+        return $this->actualizarCaja($id, $datos);
     }
 
     // Eliminar una caja

@@ -1,24 +1,30 @@
 <?php
-// Verificamos que haya sesión activa
 $nombreUsuario = $_SESSION['nombre'] ?? 'Usuario';
 $cargoUsuario  = $_SESSION['cargo'] ?? 'Cargo';
-$empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
+$empresa_id    = $_SESSION['empresa_id'] ?? null;
 
+// Obtener datos de la empresa si existe empresa_id
+$empresa = null;
+if ($empresa_id) {
+    $empresaController = new app\controllers\empresaController();
+    $empresa = $empresaController->obtenerEmpresaControlador($empresa_id);
+}
 ?>
 
 <!-- NavLateral -->
 <section class="full-width navLateral scroll" id="navLateral">
     <div class="full-width navLateral-body">
         <div class="full-width navLateral-body-logo has-text-centered tittles is-uppercase">
-            Sistema de ventas 
+            Sistema de ventas
         </div>
         <figure class="full-width" style="height: 77px;">
             <div class="navLateral-body-cl">
-                <img class="is-rounded img-responsive" src="<?php echo APP_URL; ?>app/views/fotos/default.png">
+                <img class="is-rounded img-responsive" src="<?= APP_URL ?>app/views/img/<?= htmlspecialchars($empresa['empresa_foto']); ?>">
             </div>
             <figcaption class="navLateral-body-cr pt-3">
                 <span>
-                    <?php echo htmlspecialchars($nombreUsuario); ?><br>
+                    <?php echo htmlspecialchars($empresa['empresa_nombre']); ?><br>
+                    <small style=" font-size: 22px; color: #3F51B5"><?php echo htmlspecialchars($nombreUsuario); ?></small>
                     <small>(<?php echo htmlspecialchars($cargoUsuario); ?>)</small>
                 </span>
             </figcaption>
@@ -43,7 +49,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width">
-                    <a href="<?php echo APP_URL; ?>caja"  class="full-width btn-subMenu">
+                    <a href="<?php echo APP_URL; ?>caja" class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
                             <i class="fas fa-cash-register fa-fw"></i>
                         </div>
@@ -54,7 +60,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="<?php echo APP_URL; ?>caja?accion=form"  class="full-width">
+                            <a href="<?php echo APP_URL; ?>caja?accion=form" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-cash-register fa-fw"></i>
                                 </div>
@@ -126,7 +132,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="<?php echo APP_URL; ?>cliente?accion=crear"  class="full-width">
+                            <a href="<?php echo APP_URL; ?>cliente?accion=form" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-male fa-fw"></i>
                                 </div>
@@ -136,7 +142,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="<?php echo APP_URL; ?>cliente?accion=lista"  class="full-width">
+                            <a href="<?php echo APP_URL; ?>cliente?accion=lista" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-clipboard-list fa-fw"></i>
                                 </div>
@@ -151,7 +157,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width">
-                    <a href="<?php echo APP_URL; ?>categoria"class="full-width btn-subMenu">
+                    <a href="<?php echo APP_URL; ?>categoria" class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
                             <i class="fas fa-tags fa-fw"></i>
                         </div>
@@ -162,7 +168,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="<?php echo APP_URL; ?>categoria?accion=crear" class="full-width">
+                            <a href="<?php echo APP_URL; ?>categoria?accion=form" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-tag fa-fw"></i>
                                 </div>
@@ -172,7 +178,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="<?php echo APP_URL; ?>categoria?accion=lista"class="full-width">
+                            <a href="<?php echo APP_URL; ?>categoria?accion=lista" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-clipboard-list fa-fw"></i>
                                 </div>
@@ -198,7 +204,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="<?php echo APP_URL; ?>producto?accion=crear" class="full-width">
+                            <a href="<?php echo APP_URL; ?>producto?accion=form" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-box fa-fw"></i>
                                 </div>
@@ -244,7 +250,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="<?php echo APP_URL; ?>venta?accion=crear" class="full-width">
+                            <a href="<?php echo APP_URL; ?>venta?accion=form" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-cart-plus fa-fw"></i>
                                 </div>
@@ -271,7 +277,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                 <li class="full-width">
                     <a href="#" class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
-                            <i class="far fa-file-pdf fa-fw"></i> 
+                            <i class="far fa-file-pdf fa-fw"></i>
                         </div>
                         <div class="navLateral-body-cr">
                             REPORTES
@@ -316,32 +322,78 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="<?php echo APP_URL; ?>empresa" class="full-width">
+                            <a href="#" class="full-width btn-subMenu">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-store-alt fa-fw"></i>
                                 </div>
                                 <div class="navLateral-body-cr">
                                     Datos de empresa
                                 </div>
+                                <span class="fas fa-chevron-down"></span>
                             </a>
+                            <ul class="full-width menu-principal sub-menu-options" style="margin-left: 20px; font-size: 12px;">
+                                <?php if ($empresa): ?>
+                                    <li class="full-width">
+                                        <a href="<?php echo APP_URL; ?>empresa" class="full-width">
+                                            <div class="navLateral-body-cl" style="font-size: 14px;">
+                                                <i class="fas fa-building fa-fw"></i>
+                                            </div>
+                                            <div class="navLateral-body-cr">
+                                                <?php echo htmlspecialchars($empresa['empresa_nombre']); ?>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="full-width">
+                                        <a href="#" class="full-width" style="pointer-events: none;">
+                                            <div class="navLateral-body-cl" style="font-size: 14px;">
+                                                <i class="fas fa-phone fa-fw"></i>
+                                            </div>
+                                            <div class="navLateral-body-cr">
+                                                <?php echo htmlspecialchars($empresa['empresa_telefono']); ?>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="full-width">
+                                        <a href="#" class="full-width" style="pointer-events: none;">
+                                            <div class="navLateral-body-cl">
+                                                <i class="fas fa-envelope fa-fw" style="font-size: 14px;"></i>
+                                            </div>
+                                            <div class="navLateral-body-cr">
+                                                <?php echo htmlspecialchars($empresa['empresa_email']); ?>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="full-width">
+                                        <a href="#" class="full-width" style="pointer-events: none;">
+                                            <div class="navLateral-body-cl">
+                                                <i class="fas fa-map-marker-alt fa-fw" style="font-size: 14px;"></i>
+                                            </div>
+                                            <div class="navLateral-body-cr">
+                                                <?php echo htmlspecialchars($empresa['empresa_direccion']); ?>
+                                            </div>
+                                        </a>
+                                    </li>
+                                <?php else: ?>
+                                    <li class="full-width">
+                                        <a href="#" class="full-width" style="pointer-events: none;">
+                                            <div class="navLateral-body-cl">
+                                                <i class="fas fa-exclamation-triangle fa-fw"></i>
+                                            </div>
+                                            <div class="navLateral-body-cr">
+                                                No hay empresa asociada
+                                            </div>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
                         </li>
                         <li class="full-width">
-                            <a href="usuario" class="full-width">
+                            <a href="<?php echo APP_URL; ?>miCuenta" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="fas fa-user-tie fa-fw"></i>
                                 </div>
                                 <div class="navLateral-body-cr">
                                     Mi cuenta
-                                </div>
-                            </a>
-                        </li>
-                        <li class="full-width">
-                            <a href="usuario_foto" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="fas fa-camera"></i>
-                                </div>
-                                <div class="navLateral-body-cr">
-                                    Mi foto
                                 </div>
                             </a>
                         </li>
@@ -351,7 +403,7 @@ $empresa_id  = $_SESSION['empresa_id'] ?? 'empresa';
                 <li class="full-width divider-menu-h"></li>
 
                 <li class="full-width mt-5">
-                    <a href="<?php echo APP_URL; ?>login?accion=salir"  class="full-width btn-exit" >
+                    <a href="<?php echo APP_URL; ?>login?accion=salir" class="full-width btn-exit">
                         <div class="navLateral-body-cl">
                             <i class="fas fa-power-off"></i>
                         </div>

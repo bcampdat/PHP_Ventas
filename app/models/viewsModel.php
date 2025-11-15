@@ -14,10 +14,12 @@ class viewsModel
             "usuario",
             "caja",
             "nuevoUsuario",
+            "miCuenta",
             "empresa",
             "cliente",
             "categoria",
-            "venta"
+            "venta",
+            "detallePdto",
         ];
 
         if (in_array($vista, $listaBlanca)) {

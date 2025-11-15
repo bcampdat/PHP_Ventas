@@ -19,7 +19,7 @@ class empresaController extends empresaModel {
                 'telefono' => $_POST['telefono'] ?? '',
                 'email' => $_POST['email'] ?? '',
                 'direccion' => $_POST['direccion'] ?? '',
-                'foto' => '',  
+                'foto' => $this->procesarLogo($_FILES['foto'] ?? null), // Procesar logo
             ];
 
             return $this->crearEmpresa($datos);
@@ -29,13 +29,16 @@ class empresaController extends empresaModel {
     // Actualizar una empresa existente
     public function actualizarEmpresaControlador($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            // Obtener empresa actual para el logo
+            $empresaActual = $this->obtenerEmpresa($id);
 
             $datos = [
                 'nombre' => $_POST['nombre'] ?? '',
                 'telefono' => $_POST['telefono'] ?? '',
                 'email' => $_POST['email'] ?? '',
                 'direccion' => $_POST['direccion'] ?? '',
-                'foto' => '', 
+                'foto' => $this->procesarLogo($_FILES['foto'] ?? null, $empresaActual['empresa_foto']), // Procesar logo
             ];
 
             return $this->actualizarEmpresa($id, $datos);

@@ -5,7 +5,7 @@ namespace app\models;
 use PDO;
 use app\config\dbConnection;
 
-class Usuario
+class UsuarioLogin
 {
     private $pdo;
 

@@ -27,7 +27,7 @@ class loginController extends usuarioModel {
                 $_SESSION['apellido'] = $datos['usuario_apellido'];
                 $_SESSION['usuario']  = $datos['usuario_usuario'];
                 $_SESSION['cargo']    = $datos['usuario_cargo'];
-                
+                $_SESSION['empresa_id'] = $datos['empresa_id'];
 
                 echo "<script>window.location.href='".APP_URL."index.php?views=dashboard';</script>";
                 exit;

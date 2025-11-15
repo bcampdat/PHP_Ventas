@@ -23,7 +23,7 @@
                     DB_PASS
                 );
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                echo "Conexión a la base de datos exitosa";
+                //echo "Conexión a la base de datos exitosa";
             } catch (\PDOException $e) {
                 // En caso de error de conexión, muestra un mensaje
                 die("Error al conectar con la base de datos: " . $e->getMessage());

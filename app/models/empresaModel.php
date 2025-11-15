@@ -1,9 +1,21 @@
 <?php
 namespace app\models;
-
 use PDO;
 
 class empresaModel extends mainModel {
+
+    private $uploadPath;
+
+    public function __construct() {
+        parent::__construct();
+        // Ruta para logos de empresa
+        $this->uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/POS/app/views/img/';
+        
+        // Crear la carpeta si no existe
+        if (!is_dir($this->uploadPath)) {
+            mkdir($this->uploadPath, 0755, true);
+        }
+    }
 
     // Obtener todas las empresas
     public function obtenerEmpresas() {
@@ -30,7 +42,6 @@ class empresaModel extends mainModel {
             )
         ");
         
-        // Asociar los parámetros de los datos a las variables
         foreach ($datos as $key => $value) {
             $sql->bindValue(":$key", $value);
         }
@@ -50,8 +61,7 @@ class empresaModel extends mainModel {
             WHERE empresa_id = :id
         ");
 
-        // Asociar los parámetros de los datos a las variables
-        $sql->bindParam(":id", $id, PDO::PARAM_INT);
+        $sql->bindValue(":id", $id);
         foreach ($datos as $key => $value) {
             $sql->bindValue(":$key", $value);
         }
@@ -61,9 +71,58 @@ class empresaModel extends mainModel {
 
     // Eliminar una empresa
     public function eliminarEmpresa($id) {
+        // Obtener empresa para eliminar su logo
+        $empresa = $this->obtenerEmpresa($id);
+        if($empresa && $empresa['empresa_foto'] !== 'default.png') {
+            $this->eliminarImagen($empresa['empresa_foto']);
+        }
+
         $sql = $this->getPDO()->prepare("DELETE FROM empresa WHERE empresa_id = :id");
         $sql->bindParam(":id", $id, PDO::PARAM_INT);
         return $sql->execute();
     }
-}
 
+    // Métodos para gestión de imágenes 
+    private function subirImagen($archivo) {
+        $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);
+        $nombreArchivo = uniqid() . '.' . $extension;
+        $rutaDestino = $this->uploadPath . $nombreArchivo;
+
+        // Validar tipo de archivo
+        $extensionesPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
+        if(!in_array(strtolower($extension), $extensionesPermitidas)) {
+            return 'default.png';
+        }
+
+        // Validar tamaño (máximo 2MB)
+        if($archivo['size'] > 2097152) {
+            return 'default.png';
+        }
+
+        if(move_uploaded_file($archivo['tmp_name'], $rutaDestino)) {
+            return $nombreArchivo;
+        }
+
+        return 'default.png';
+    }
+
+    private function eliminarImagen($nombreArchivo) {
+        $rutaArchivo = $this->uploadPath . $nombreArchivo;
+        if(file_exists($rutaArchivo) && $nombreArchivo !== 'default.png') {
+            unlink($rutaArchivo);
+        }
+    }
+
+    // Método público para procesar la subida de logo
+    public function procesarLogo($archivo, $logoActual = null) {
+        // Si se sube nueva imagen
+        if(isset($archivo) && $archivo['error'] === 0) {
+            $nuevoLogo = $this->subirImagen($archivo);
+            if($logoActual && $logoActual !== 'default.png') {
+                $this->eliminarImagen($logoActual);
+            }
+            return $nuevoLogo;
+        }
+        return $logoActual ?: 'default.png';
+    }
+}

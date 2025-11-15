@@ -11,6 +11,13 @@ class cajaModel extends mainModel {
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function obtenerCajasPorEmpresa($empresaId) {
+    $sql = $this->getPDO()->prepare("SELECT * FROM caja WHERE empresa_id = :empresa_id");
+    $sql->bindParam(":empresa_id", $empresaId, PDO::PARAM_INT);
+    $sql->execute();
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
     // Obtener una caja por ID
     public function obtenerCaja($id) {
         $sql = $this->getPDO()->prepare("SELECT * FROM caja WHERE caja_id = :id");
