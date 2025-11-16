@@ -83,7 +83,7 @@ if ($accion === 'lista') {
 
 <div class="container">
     <div class="columns">
-        <div class="column is-12">
+        <div class="column is-10 is-offset-1"> <!-- Cambiado de is-8 is-offset-2 a is-10 is-offset-1 -->
 
             <!-- Toast Notification -->
             <?php if ($toastMessage): ?>
@@ -104,7 +104,9 @@ if ($accion === 'lista') {
                 <div class="box">
                     <h3 class="title is-4 has-text-centered">Nuevo Cliente</h3>
                     <form method="POST" autocomplete="off">
+
                         <div class="columns is-multiline">
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Tipo de Documento</label>
@@ -113,6 +115,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Número de Documento</label>
@@ -121,6 +124,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Nombre</label>
@@ -129,6 +133,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Apellido</label>
@@ -137,6 +142,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Provincia</label>
@@ -145,6 +151,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Ciudad</label>
@@ -153,6 +160,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-12">
                                 <div class="field">
                                     <label class="label">Dirección</label>
@@ -161,6 +169,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Teléfono</label>
@@ -169,6 +178,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Email</label>
@@ -177,6 +187,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="field mt-4 has-text-centered">
@@ -191,7 +202,9 @@ if ($accion === 'lista') {
                 <div class="box">
                     <h3 class="title is-4 has-text-centered">Editar Cliente</h3>
                     <form method="POST" autocomplete="off">
+
                         <div class="columns is-multiline">
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Tipo de Documento</label>
@@ -200,6 +213,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Número de Documento</label>
@@ -208,6 +222,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Nombre</label>
@@ -216,6 +231,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Apellido</label>
@@ -224,6 +240,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Provincia</label>
@@ -232,6 +249,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Ciudad</label>
@@ -240,6 +258,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-12">
                                 <div class="field">
                                     <label class="label">Dirección</label>
@@ -248,6 +267,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Teléfono</label>
@@ -256,6 +276,7 @@ if ($accion === 'lista') {
                                     </div>
                                 </div>
                             </div>
+
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Email</label>
@@ -274,6 +295,7 @@ if ($accion === 'lista') {
                 </div>
 
             <?php elseif ($accion === 'lista'): ?>
+
                 <!-- TABLA DE CLIENTES -->
                 <div class="box">
                     <div class="level">
@@ -286,49 +308,46 @@ if ($accion === 'lista') {
                             </a>
                         </div>
                     </div>
-
-                    <div class="table-container">
-                        <table class="table is-striped is-fullwidth is-hoverable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Documento</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Teléfono</th>
-                                    <th>Email</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!empty($clientes)): ?>
-                                    <?php foreach ($clientes as $cliente): ?>
-                                        <tr>
-                                            <td><?= $cliente['cliente_id']; ?></td>
-                                            <td>
-                                                <small class="has-text-grey"><?= $cliente['cliente_tipo_documento'] ?></small><br>
-                                                <?= $cliente['cliente_numero_documento']; ?>
-                                            </td>
-                                            <td><?= $cliente['cliente_nombre']; ?></td>
-                                            <td><?= $cliente['cliente_apellido']; ?></td>
-                                            <td><?= $cliente['cliente_telefono']; ?></td>
-                                            <td><?= $cliente['cliente_email']; ?></td>
-                                            <td>
-                                                <a href="<?= APP_URL ?>cliente?accion=editar&id=<?= $cliente['cliente_id'] ?>">Editar</a> |
-                                                </a>
-                                                <a href="<?= APP_URL ?>cliente?accion=eliminar&id=<?= $cliente['cliente_id'] ?>">Eliminar
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
+                    <table class="table is-striped is-fullwidth is-hoverable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Documento</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Teléfono</th>
+                                <th>Email</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($clientes)): ?>
+                                <?php foreach ($clientes as $cliente): ?>
                                     <tr>
-                                        <td colspan="7" class="has-text-centered">No hay clientes registrados</td>
+                                        <td><?= $cliente['cliente_id']; ?></td>
+                                        <td class="is-narrow">
+                                            <div class="documento-cell">
+                                                <small class="is-size-7 has-text-info"><?= $cliente['cliente_tipo_documento']; ?></small>
+                                                <span><?= $cliente['cliente_numero_documento']; ?></span>
+                                            </div>
+                                        </td>
+                                        <td><?= $cliente['cliente_nombre']; ?></td>
+                                        <td><?= $cliente['cliente_apellido']; ?></td>
+                                        <td><?= $cliente['cliente_telefono']; ?></td>
+                                        <td><?= $cliente['cliente_email']; ?></td>
+                                        <td class="is-narrow">
+                                            <a href="<?= APP_URL ?>cliente?accion=editar&id=<?= $cliente['cliente_id'] ?>">Editar</a> |
+                                            <a href="<?= APP_URL ?>cliente?accion=eliminar&id=<?= $cliente['cliente_id'] ?>">Eliminar</a>
+                                        </td>
                                     </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="7" class="has-text-centered">No hay clientes registrados</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             <?php endif; ?>
         </div>

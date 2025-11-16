@@ -1,5 +1,4 @@
 <?php
-
 use app\controllers\productoController;
 use app\controllers\categoriaController;
 
@@ -58,11 +57,9 @@ if ($accion === 'editar' && $id) $productoEditar = $productoCtrl->obtenerProduct
 $productos = $productoCtrl->listarProductos();
 if ($categoria_view) $categorias = $categoriaCtrl->listarCategoriasControlador();
 ?>
-
 <div class="container">
     <div class="columns">
-        <div class="column is-12">
-
+        <div class="column is-10 is-offset-1">
             <!-- Navegación -->
             <div class="level mb-4">
                 <div class="level-left">
@@ -79,117 +76,146 @@ if ($categoria_view) $categorias = $categoriaCtrl->listarCategoriasControlador()
 
             <?php if ($accion === 'form' || $accion === 'editar'): ?>
                 <!-- Formulario -->
-                <div class="box">
-                    <form method="POST" enctype="multipart/form-data">
+                <div class="box">                    
+                    <form method="POST" enctype="multipart/form-data" autocomplete="off">
                         <div class="columns is-multiline">
+                            
+                            <!-- Fila 1: Código y Nombre -->
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Código</label>
-                                    <input class="input" type="text" name="codigo" value="<?= $productoEditar['producto_codigo'] ?? uniqid('P-') ?>">
+                                    <div class="control">
+                                        <input class="input" type="text" name="codigo" value="<?= $productoEditar['producto_codigo'] ?? uniqid('P-') ?>" placeholder="Código del producto">
+                                    </div>
                                 </div>
                             </div>
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Nombre *</label>
-                                    <input class="input" type="text" name="nombre" required value="<?= $productoEditar['producto_nombre'] ?? '' ?>">
-                                </div>
-                            </div>
-                            <div class="column is-12">
-                                <div class="field">
-                                    <label class="label">Imagen del Producto</label>
-
-                                    <?php if (isset($productoEditar) && $productoEditar['producto_foto'] !== 'default.png'): ?>
-                                        <!-- Mostrar imagen actual si existe -->
-                                        <div class="mb-3">
-                                            <p class="help">Imagen actual:</p>
-                                            <img src="<?= APP_URL ?>app/views/productos/<?= $productoEditar['producto_foto'] ?>"
-                                                alt="<?= $productoEditar['producto_nombre'] ?>"
-                                                style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;">
-                                            <p class="help"><?= $productoEditar['producto_foto'] ?></p>
-                                        </div>
-                                        <input type="hidden" name="foto_actual" value="<?= $productoEditar['producto_foto'] ?>">
-                                    <?php else: ?>
-                                        <!-- Mostrar imagen por defecto si es nuevo o tiene default.png -->
-                                        <div class="mb-3">
-                                            <p class="help">Imagen por defecto:</p>
-                                            <img src="<?= APP_URL ?>app/views/productos/default.png"
-                                                alt="Imagen por defecto"
-                                                style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;">
-                                        </div>
-                                    <?php endif; ?>
-
                                     <div class="control">
-                                        <input class="input" type="file" name="foto" accept="image/*">
+                                        <input class="input" type="text" name="nombre" required value="<?= $productoEditar['producto_nombre'] ?? '' ?>" placeholder="Nombre del producto">
                                     </div>
-                                    <p class="help">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB</p>
                                 </div>
                             </div>
+
+                            <!-- Fila 2: Stock y Unidad -->
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Stock *</label>
-                                    <input class="input" type="number" name="stock" required value="<?= $productoEditar['producto_stock_total'] ?? 0 ?>">
+                                    <div class="control">
+                                        <input class="input" type="number" name="stock" required value="<?= $productoEditar['producto_stock_total'] ?? 0 ?>" placeholder="0">
+                                    </div>
                                 </div>
                             </div>
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Unidad</label>
-                                    <div class="select is-fullwidth">
-                                        <select name="unidad">
-                                            <?php foreach (PRODUCTO_UNIDAD as $unidad): ?>
-                                                <option value="<?= $unidad ?>"
-                                                    <?= (isset($productoEditar) && $productoEditar['producto_tipo_unidad'] == $unidad) ? 'selected' : '' ?>>
-                                                    <?= $unidad ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="unidad">
+                                                <?php foreach (PRODUCTO_UNIDAD as $unidad): ?>
+                                                    <option value="<?= $unidad ?>"
+                                                        <?= (isset($productoEditar) && $productoEditar['producto_tipo_unidad'] == $unidad) ? 'selected' : '' ?>>
+                                                        <?= $unidad ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fila 3: Precio Compra y Precio Venta -->
+                            <div class="column is-6">
+                                <div class="field">
+                                    <label class="label">Precio Compra</label>
+                                    <div class="control">
+                                        <input class="input" type="number" step="0.01" name="precio_compra" value="<?= $productoEditar['producto_precio_compra'] ?? 0 ?>" placeholder="0.00">
                                     </div>
                                 </div>
                             </div>
                             <div class="column is-6">
                                 <div class="field">
-                                    <label class="label">Precio Compra</label>
-                                    <input class="input" type="number" step="0.01" name="precio_compra" value="<?= $productoEditar['producto_precio_compra'] ?? 0 ?>">
-                                </div>
-                            </div>
-                            <div class="column is-6">
-                                <div class="field">
                                     <label class="label">Precio Venta *</label>
-                                    <input class="input" type="number" step="0.01" name="precio_venta" required value="<?= $productoEditar['producto_precio_venta'] ?? 0 ?>">
+                                    <div class="control">
+                                        <input class="input" type="number" step="0.01" name="precio_venta" required value="<?= $productoEditar['producto_precio_venta'] ?? 0 ?>" placeholder="0.00">
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- Fila 4: Marca y Modelo -->
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Marca</label>
-                                    <input class="input" type="text" name="marca" value="<?= $productoEditar['producto_marca'] ?? '' ?>">
+                                    <div class="control">
+                                        <input class="input" type="text" name="marca" value="<?= $productoEditar['producto_marca'] ?? '' ?>" placeholder="Marca del producto">
+                                    </div>
                                 </div>
                             </div>
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Modelo</label>
-                                    <input class="input" type="text" name="modelo" value="<?= $productoEditar['producto_modelo'] ?? '' ?>">
+                                    <div class="control">
+                                        <input class="input" type="text" name="modelo" value="<?= $productoEditar['producto_modelo'] ?? '' ?>" placeholder="Modelo del producto">
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- Fila 5: Estado y Categoría -->
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Estado</label>
-                                    <div class="select is-fullwidth">
-                                        <select name="estado">
-                                            <option value="Activo" <?= (isset($productoEditar) && $productoEditar['producto_estado'] == 'Activo') ? 'selected' : '' ?>>Activo</option>
-                                            <option value="Inactivo" <?= (isset($productoEditar) && $productoEditar['producto_estado'] == 'Inactivo') ? 'selected' : '' ?>>Inactivo</option>
-                                        </select>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="estado">
+                                                <option value="Activo" <?= (isset($productoEditar) && $productoEditar['producto_estado'] == 'Activo') ? 'selected' : '' ?>>Activo</option>
+                                                <option value="Inactivo" <?= (isset($productoEditar) && $productoEditar['producto_estado'] == 'Inactivo') ? 'selected' : '' ?>>Inactivo</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label">Categoría ID</label>
-                                    <input class="input" type="number" name="categoria" value="<?= $productoEditar['categoria_id'] ?? 1 ?>">
+                                    <div class="control">
+                                        <input class="input" type="number" name="categoria" value="<?= $productoEditar['categoria_id'] ?? 1 ?>" placeholder="ID de categoría">
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- Fila 6: Imagen (ocupa toda la fila) -->
+                            <div class="column is-12">
+                                <div class="field">
+                                    <label class="label">Imagen del Producto</label>
+                                    <div class="control">
+                                        <?php if (isset($productoEditar) && $productoEditar['producto_foto'] !== 'default.png'): ?>
+                                            <div class="mb-3">
+                                                <p class="help">Imagen actual:</p>
+                                                <img src="<?= APP_URL ?>app/views/productos/<?= $productoEditar['producto_foto'] ?>"
+                                                    alt="<?= $productoEditar['producto_nombre'] ?>"
+                                                    style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;">
+                                                <p class="help"><?= $productoEditar['producto_foto'] ?></p>
+                                            </div>
+                                            <input type="hidden" name="foto_actual" value="<?= $productoEditar['producto_foto'] ?>">
+                                        <?php else: ?>
+                                            <div class="mb-3">
+                                                <p class="help">Imagen por defecto:</p>
+                                                <img src="<?= APP_URL ?>app/views/productos/default.png"
+                                                    alt="Imagen por defecto"
+                                                    style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;">
+                                            </div>
+                                        <?php endif; ?>
+                                        <input class="input" type="file" name="foto" accept="image/*">
+                                    </div>
+                                    <p class="help">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB</p>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="field has-text-centered mt-4">
-                            <button type="submit" class="button is-info is-rounded">Guardar</button>
+                            <button type="submit" class="button is-info is-rounded"><?= $accion === 'form' ? 'Registrar' : 'Actualizar' ?></button>
                             <a href="<?= APP_URL ?>producto?accion=lista" class="button is-light is-rounded">Cancelar</a>
                         </div>
                     </form>
@@ -197,7 +223,7 @@ if ($categoria_view) $categorias = $categoriaCtrl->listarCategoriasControlador()
 
             <?php elseif ($categoria_view): ?>
                 <!-- Por categoría -->
-                <div class="box">
+                <div class="box">                    
                     <?php foreach ($categorias as $cat): ?>
                         <?php $productosCategoria = array_filter($productos, fn($p) => $p['categoria_id'] == $cat['categoria_id']); ?>
                         <?php if ($productosCategoria): ?>
@@ -206,7 +232,7 @@ if ($categoria_view) $categorias = $categoriaCtrl->listarCategoriasControlador()
                                     <?= $cat['categoria_nombre'] ?>
                                     <span class="tag is-info"><?= count($productosCategoria) ?></span>
                                 </h4>
-                                <table class="table is-striped is-fullwidth">
+                                <table class="table is-striped is-fullwidth is-hoverable">
                                     <thead>
                                         <tr>
                                             <th>Código</th>
@@ -220,12 +246,25 @@ if ($categoria_view) $categorias = $categoriaCtrl->listarCategoriasControlador()
                                     <tbody>
                                         <?php foreach ($productosCategoria as $p): ?>
                                             <tr>
-                                                <td><?= $p['producto_codigo'] ?></td>
-                                                <td><?= $p['producto_nombre'] ?></td>
-                                                <td><?= $p['producto_stock_total'] ?></td>
-                                                <td><?= number_format($p['producto_precio_venta'], MONEDA_DECIMALES, SEPARADOR_DECIMAL, SEPARADOR_MILLAR) ?>&nbsp;<?= MONEDA_SIMBOLO ?></td>
-                                                <td><span class="tag is-<?= $p['producto_estado'] === 'Activo' ? 'success' : 'danger' ?>"><?= $p['producto_estado'] ?></span></td>
+                                                <td><strong><?= $p['producto_codigo'] ?></strong></td>
+                                                <td class="is-narrow">
+                                                    <strong><?= $p['producto_nombre'] ?></strong><br>
+                                                    <small class="is-size-7 has-text-grey"><?= $p['producto_marca'] ?> - <?= $p['producto_modelo'] ?></small>
+                                                </td>
+                                                <td class="is-narrow">
+                                                    <?= $p['producto_stock_total'] ?><br>
+                                                    <small class="is-size-7 has-text-grey"><?= $p['producto_tipo_unidad'] ?></small>
+                                                </td>
+                                                <td class="is-narrow">
+                                                    <strong><?= number_format($p['producto_precio_venta'], MONEDA_DECIMALES, SEPARADOR_DECIMAL, SEPARADOR_MILLAR) ?>&nbsp;<?= MONEDA_SIMBOLO ?></strong><br>
+                                                    <small class="is-size-7 has-text-grey">Compra: <?= number_format($p['producto_precio_compra'], MONEDA_DECIMALES, SEPARADOR_DECIMAL, SEPARADOR_MILLAR) ?>&nbsp;<?= MONEDA_SIMBOLO ?></small>
+                                                </td>
                                                 <td>
+                                                    <span class="tag is-<?= $p['producto_estado'] === 'Activo' ? 'success' : 'danger' ?>">
+                                                        <?= $p['producto_estado'] ?>
+                                                    </span>
+                                                </td>
+                                                <td class="is-narrow">
                                                     <a href="<?= APP_URL ?>detallePdto?accion=ver&id=<?= $p['producto_id'] ?>">Ver</a> |
                                                     <a href="<?= APP_URL ?>producto?accion=editar&id=<?= $p['producto_id'] ?>">Editar</a> |
                                                     <a href="<?= APP_URL ?>producto?accion=eliminar&id=<?= $p['producto_id'] ?>">Eliminar</a>
@@ -242,41 +281,51 @@ if ($categoria_view) $categorias = $categoriaCtrl->listarCategoriasControlador()
             <?php else: ?>
                 <!-- Lista normal -->
                 <div class="box">
-                    <table class="table is-striped is-fullwidth">
+                    <table class="table is-striped is-fullwidth is-hoverable">
                         <thead>
                             <tr>
                                 <th>Código</th>
                                 <th>Producto</th>
                                 <th>Stock</th>
-                                <th>P. Venta</th>
+                                <th>Precios</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($productos as $p): ?>
+                            <?php if (!empty($productos)): ?>
+                                <?php foreach ($productos as $p): ?>
+                                    <tr>
+                                        <td><strong><?= $p['producto_codigo'] ?></strong></td>
+                                        <td class="is-narrow">
+                                            <strong><?= $p['producto_nombre'] ?></strong><br>
+                                            <small class="is-size-7 has-text-grey"><?= $p['producto_marca'] ?> - <?= $p['producto_modelo'] ?></small>
+                                        </td>
+                                        <td class="is-narrow">
+                                            <?= $p['producto_stock_total'] ?><br>
+                                            <small class="is-size-7 has-text-grey"><?= $p['producto_tipo_unidad'] ?></small>
+                                        </td>
+                                        <td class="is-narrow">
+                                            <strong><?= number_format($p['producto_precio_venta'], MONEDA_DECIMALES, SEPARADOR_DECIMAL, SEPARADOR_MILLAR) ?>&nbsp;<?= MONEDA_SIMBOLO ?></strong><br>
+                                            <small class="is-size-7 has-text-grey">Compra: <?= number_format($p['producto_precio_compra'], MONEDA_DECIMALES, SEPARADOR_DECIMAL, SEPARADOR_MILLAR) ?>&nbsp;<?= MONEDA_SIMBOLO ?></small>
+                                        </td>
+                                        <td>
+                                            <span class="tag is-<?= $p['producto_estado'] === 'Activo' ? 'success' : 'danger' ?>">
+                                                <?= $p['producto_estado'] ?>
+                                            </span>
+                                        </td>
+                                        <td class="is-narrow">
+                                            <a href="<?= APP_URL ?>detallePdto?accion=ver&id=<?= $p['producto_id'] ?>">Ver</a> |
+                                            <a href="<?= APP_URL ?>producto?accion=editar&id=<?= $p['producto_id'] ?>">Editar</a> |
+                                            <a href="<?= APP_URL ?>producto?accion=eliminar&id=<?= $p['producto_id'] ?>">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
                                 <tr>
-                                    <td><strong><?= $p['producto_codigo'] ?></strong></td>
-                                    <td>
-                                        <div><strong><?= $p['producto_nombre'] ?></strong></div>
-                                        <small class="has-text-grey"><?= $p['producto_marca'] ?> - <?= $p['producto_modelo'] ?></small>
-                                    </td>
-                                    <td>
-                                        <div><?= $p['producto_stock_total'] ?></div>
-                                        <small class="has-text-grey"><?= $p['producto_tipo_unidad'] ?></small>
-                                    </td>
-                                    <td>
-                                        <div><strong> <?= number_format($p['producto_precio_venta'], MONEDA_DECIMALES, SEPARADOR_DECIMAL, SEPARADOR_MILLAR) ?>&nbsp;<?= MONEDA_SIMBOLO ?></strong></div>
-                                        <small class="has-text-grey">Compra: <?= number_format($p['producto_precio_compra'], MONEDA_DECIMALES, SEPARADOR_DECIMAL, SEPARADOR_MILLAR) ?>&nbsp;<?= MONEDA_SIMBOLO ?></small>
-                                    </td>
-                                    <td><span class="tag is-<?= $p['producto_estado'] === 'Activo' ? 'success' : 'danger' ?>"><?= $p['producto_estado'] ?></span></td>
-                                    <td>
-                                        <a href="<?= APP_URL ?>detallePdto?accion=ver&id=<?= $p['producto_id'] ?>">Ver</a> |
-                                        <a href="<?= APP_URL ?>producto?accion=editar&id=<?= $p['producto_id'] ?>">Editar</a> |
-                                        <a href="<?= APP_URL ?>producto?accion=eliminar&id=<?= $p['producto_id'] ?>">Eliminar</a>
-                                    </td>
+                                    <td colspan="6" class="has-text-centered">No hay productos registrados</td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>

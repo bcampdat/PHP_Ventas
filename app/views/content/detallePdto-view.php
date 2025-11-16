@@ -35,8 +35,8 @@ if ($producto['producto_precio_compra'] > 0) {
 ?>
 
 <div class="container">
-    <div class="columns">
-        <div class="column is-12">
+    <div class="columns is-centered">
+        <div class="column is-10 is-offset-1">
             <div class="level">
                 <div class="level-left">
                     <h3 class="title is-4">Detalle Producto</h3>
@@ -48,24 +48,22 @@ if ($producto['producto_precio_compra'] > 0) {
             </div>
 
             <div class="box">
-                <div class="columns">
-                    <div class="column is-4">
-                        <div class="has-text-centered">
-                            <img src="<?= APP_URL ?>app/views/productos/<?= $producto['producto_foto'] ?>" 
-                                 alt="<?= $producto['producto_nombre'] ?>"
-                                 style="max-width: 250px; border: 1px solid #ddd; border-radius: 8px; padding: 10px;"
-                                 onerror="this.src='<?= APP_URL ?>app/views/productos/default.png'">
-                        </div>
+                <div class="columns is-vcentered">
+                    <div class="column is-4 has-text-centered">
+                        <img src="<?= APP_URL ?>app/views/productos/<?= $producto['producto_foto'] ?>" 
+                             alt="<?= $producto['producto_nombre'] ?>"
+                             style="max-width: 250px; border: 1px solid #ddd; border-radius: 8px; padding: 10px;"
+                             onerror="this.src='<?= APP_URL ?>app/views/productos/default.png'">
                     </div>
                     <div class="column is-8">
-                        <h4 class="title is-3 mb-4"><?= $producto['producto_nombre'] ?></h4>
+                        <h4 class="title is-3 mb-4 has-text-centered"><?= $producto['producto_nombre'] ?></h4>
                         
                         <div class="columns is-multiline">
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label has-text-weight-semibold">Código</label>
                                     <div class="control">
-                                        <div class="is-size-5"><?= $producto['producto_codigo'] ?></div>
+                                        <div class="is-size-5 has-text-centered"><?= $producto['producto_codigo'] ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +71,7 @@ if ($producto['producto_precio_compra'] > 0) {
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label has-text-weight-semibold">Estado</label>
-                                    <div class="control">
+                                    <div class="control has-text-centered">
                                         <span class="tag is-<?= $producto['producto_estado'] === 'Activo' ? 'success' : 'danger' ?> is-medium">
                                             <?= $producto['producto_estado'] ?>
                                         </span>
@@ -85,7 +83,7 @@ if ($producto['producto_precio_compra'] > 0) {
                                 <div class="field">
                                     <label class="label has-text-weight-semibold">Marca</label>
                                     <div class="control">
-                                        <div class="is-size-6"><?= $producto['producto_marca'] ?: 'No especificada' ?></div>
+                                        <div class="is-size-6 has-text-centered"><?= $producto['producto_marca'] ?: 'No especificada' ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +92,7 @@ if ($producto['producto_precio_compra'] > 0) {
                                 <div class="field">
                                     <label class="label has-text-weight-semibold">Modelo</label>
                                     <div class="control">
-                                        <div class="is-size-6"><?= $producto['producto_modelo'] ?: 'No especificado' ?></div>
+                                        <div class="is-size-6 has-text-centered"><?= $producto['producto_modelo'] ?: 'No especificado' ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +100,7 @@ if ($producto['producto_precio_compra'] > 0) {
                             <div class="column is-6">
                                 <div class="field">
                                     <label class="label has-text-weight-semibold">Categoría</label>
-                                    <div class="control">
+                                    <div class="control has-text-centered">
                                         <span class="tag is-info is-light"><?= $categoriaNombre ?></span>
                                     </div>
                                 </div>
@@ -112,7 +110,7 @@ if ($producto['producto_precio_compra'] > 0) {
                                 <div class="field">
                                     <label class="label has-text-weight-semibold">Stock</label>
                                     <div class="control">
-                                        <div class="is-size-5 has-text-info"><?= $producto['producto_stock_total'] ?> 
+                                        <div class="is-size-5 has-text-info has-text-centered"><?= $producto['producto_stock_total'] ?> 
                                             <span class="is-size-6 has-text-grey"><?= $producto['producto_tipo_unidad'] ?></span>
                                         </div>
                                     </div>

@@ -344,6 +344,14 @@ body,html{
 .pageContent-change{
     width: 100%;
 }
+
+/* Estilos adicionales para mejorar la apariencia de la tabla */
+.documento-cell {
+    white-space: nowrap;
+}
+.table th, .table td {
+    vertical-align: middle;
+}
 /*=============Estilos detalle de venta*/
 .sale-details{
     display: flex;
